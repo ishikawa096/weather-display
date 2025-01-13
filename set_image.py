@@ -1,5 +1,7 @@
 # https: // github.com/pimoroni/inky/blob/v2.0.0/examples/7color/image.py
 import os
+
+from dotenv import load_dotenv
 from add_text_to_image import add_text_to_image
 from format_weather_text import format_weather_text
 from get_random_image_url import get_random_image_url
@@ -7,6 +9,10 @@ from get_weather import get_weather
 from PIL import Image, ImageDraw, ImageFont
 
 from inky.auto import auto
+
+# .envファイルから環境変数を読み込む
+load_dotenv()
+
 
 saturation = 0.5
 

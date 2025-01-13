@@ -1,8 +1,12 @@
 import os
+from dotenv import load_dotenv
 import requests
 from PIL import Image, ImageDraw, ImageFont
 from io import BytesIO
 from select_random_color import select_random_color
+
+# .envファイルから環境変数を読み込む
+load_dotenv()
 
 
 def add_text_to_image(image_url, text):
