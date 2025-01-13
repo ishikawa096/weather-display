@@ -12,7 +12,7 @@ def add_text_to_image(image_url, text):
 
     # フォントファイルとサイズを指定
     font_path = "./assets/fonts/Better VCR 9.0.1.ttf"  # フォントファイルのパス
-    font_size = 16  # フォントサイズ
+    font_size = 20  # フォントサイズ
     font = ImageFont.truetype(font_path, font_size)
 
     # 画像に文字を追加

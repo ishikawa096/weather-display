@@ -8,10 +8,11 @@ def format_weather_text(weather_data):
     try:
         tz = pytz.timezone('Asia/Tokyo')
         currentDate = datetime.fromtimestamp(
-            weather_data['current']['dt'] + weather_data['timezone_offset'], tz=tz)
+            weather_data['current']['dt'], tz=tz)
         current = weather_data['current']
         currentWeather = current['weather'][0]
 
+        # 今後24時間分の天気を取得
         hourly = [x for x in weather_data['hourly']
                   if current['dt'] < x['dt'] < current['dt'] + 24 * 60 * 60]
 
@@ -24,7 +25,7 @@ def format_weather_text(weather_data):
         hourlyMinTemp = round(min([x['temp'] for x in hourly]))
 
         formatted_text = (
-            f"{currentDate.strftime('%m/%d %H:%M')} 》 {round(current['temp'])}℃ {currentWeather['main']} {hourlyMaxTemp}℃/{hourlyMinTemp}℃\n"
+            f"{currentDate.strftime('%m/%d %H:%M')} 》 {round(current['temp'])}℃ {currentWeather['description']} {hourlyMaxTemp}℃/{hourlyMinTemp}℃\n"
             f"☂{hourlyPop_str}\n"
         )
         return formatted_text

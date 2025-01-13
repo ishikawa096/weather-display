@@ -7,15 +7,16 @@ load_dotenv()
 
 
 def get_weather():
-    # OpenWeatherMap APIキーを環境変数から取得
+    # OpenWeatherMap API情報を環境変数から取得
+    base_url = os.getenv('OPENWEATHERMAP_BASE_URL')
     api_key = os.getenv('OPENWEATHERMAP_API_KEY')
 
-    # 東経139度41分49秒、北緯35度31分47秒を度に変換
-    lat = 35.5297
-    lon = 139.6970
+    # 緯度と経度を環境変数から取得
+    lat = os.getenv('LAT')
+    lon = os.getenv('LON')
 
     # APIエンドポイント
-    url = f"https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&units=metric&exclude=minutely,daily,alerts&appid={api_key}"
+    url = f"{base_url}?lat={lat}&lon={lon}&units=metric&exclude=minutely,daily,alerts&appid={api_key}"
 
     # APIリクエストを送信
     response = requests.get(url)
