@@ -20,8 +20,6 @@ def get_random_image_url():
         '?query=' + parameters['query'] + \
         '&orientation=' + parameters['orientation']
 
-    print(f"Request URL: {url}")
-
     # リクエストヘッダーにアクセストークンを追加
     headers = {
         'Authorization': f'Client-ID {access_key}'
@@ -40,7 +38,6 @@ def get_random_image_url():
             'fit=max', 'fit=crop'
         )
 
-        print(f"Random Image URL: {image_url}")
         return image_url
     else:
         print(f"Error: {response.status_code}")

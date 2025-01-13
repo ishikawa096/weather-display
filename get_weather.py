@@ -15,8 +15,7 @@ def get_weather():
     lon = 139.6970
 
     # APIエンドポイント
-    url = f"https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={
-        lon}&units=metric&exclude=minutely,daily,alerts&appid={api_key}"
+    url = f"https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&units=metric&exclude=minutely,daily,alerts&appid={api_key}"
 
     # APIリクエストを送信
     response = requests.get(url)
