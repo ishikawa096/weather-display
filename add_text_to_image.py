@@ -1,3 +1,4 @@
+import os
 import requests
 from PIL import Image, ImageDraw, ImageFont
 from io import BytesIO
@@ -11,9 +12,7 @@ def add_text_to_image(image_url, text):
     draw = ImageDraw.Draw(image)
 
     # フォントファイルとサイズを指定
-    font_path = "./assets/fonts/Better VCR 9.0.1.ttf"  # フォントファイルのパス
-    font_size = 20  # フォントサイズ
-    font = ImageFont.truetype(font_path, font_size)
+    font = ImageFont.truetype(os.getenv('FONT_PATH'), size=20)
 
     # 画像に文字を追加
     color = select_random_color()
