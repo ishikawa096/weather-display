@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 from add_text_to_image import add_text_to_image
 from format_weather_text import format_weather_text
 from get_random_image_url import get_random_image_url
+from get_sensor_data import get_sensor_data
 from get_weather import get_weather
 from PIL import Image, ImageDraw, ImageFont
 
@@ -34,15 +35,23 @@ inky = auto(ask_user=True, verbose=True)
 
 weather_data = get_weather()
 text = format_weather_text(weather_data)
+
+sensor_data = get_sensor_data()
+# sensor_data = {
+#     "co2": 500,
+#     "temperature": 20,
+#     "humidity": 25
+# }
+
 image_url = get_random_image_url()
 
 if not image_url:
     display_error_message(inky, "Error: image_url is None")
     exit()
 
-image = add_text_to_image(
-    # image_url, "☂☁☀☃★☽\n(12/30 15:00)☀18℃_30℃/13℃_18:00☂20%\n20℃_25%rh_500ppm")
-    image_url, text)
+image = add_text_to_image(image_url, text, sensor_data)
+
+# image.save("image.png")
 
 inky.set_image(image, saturation=saturation)
 inky.show()
