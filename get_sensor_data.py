@@ -14,6 +14,6 @@ def get_sensor_data():
         #       (scd4x.CO2, scd4x.temperature, scd4x.relative_humidity))
         return {
             "co2": scd4x.CO2,
-            "temperature": scd4x.temperature,
-            "humidity": scd4x.relative_humidity
+            "temperature": round(scd4x.temperature, 1),
+            "humidity": round(scd4x.relative_humidity, 1)
         }
