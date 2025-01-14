@@ -24,11 +24,16 @@ def format_weather_text(weather_data):
         hourlyMaxTemp = round(max([x['temp'] for x in hourly]))
         hourlyMinTemp = round(min([x['temp'] for x in hourly]))
 
-        formatted_text = (
-            f"{currentDate.strftime('%m/%d %H:%M')} 》 {round(current['temp'])}℃ {currentWeather['description']} {hourlyMaxTemp}℃/{hourlyMinTemp}℃\n"
-            f"☂{hourlyPop_str}\n"
-        )
-        return formatted_text
+        weather_text = {
+            'date': currentDate.strftime('%m/%d'),
+            'time': currentDate.strftime('%H:%M'),
+            'temp': round(current['temp'], 1),
+            'description': currentWeather['description'],
+            'maxTemp': hourlyMaxTemp,
+            'minTemp': hourlyMinTemp,
+            'pop': '☂' + hourlyPop_str
+        }
+        return weather_text
     except Exception as e:
         print(e)
     return "Error: Something went wrong ☹"
