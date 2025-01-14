@@ -11,12 +11,6 @@ from PIL import Image, ImageDraw, ImageFont
 
 from inky.auto import auto
 
-# .envファイルから環境変数を読み込む
-load_dotenv()
-
-
-saturation = 0.5
-
 
 def display_error_message(inky, message):
     # エラーメッセージを含む画像を生成
@@ -31,6 +25,10 @@ def display_error_message(inky, message):
     inky.show()
 
 
+# .envファイルから環境変数を読み込む
+load_dotenv()
+
+saturation = 0.5
 inky = auto(ask_user=True, verbose=True)
 
 weather_data = get_weather()
@@ -39,11 +37,11 @@ text = format_weather_text(weather_data)
 sensor_data = get_sensor_data()
 # sensor_data = {
 #     "co2": 500,
-#     "temperature": 20,
-#     "humidity": 25
+#     "temperature": 20.9,
+#     "humidity": 25.3
 # }
 
-image_url = get_random_image_url()
+image_url = get_random_image_url(text['description'])
 
 if not image_url:
     display_error_message(inky, "Error: image_url is None")

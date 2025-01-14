@@ -6,12 +6,13 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-def get_random_image_url():
+def get_random_image_url(query):
     # Unsplash APIのアクセストークン
     access_key = os.getenv('UNSPLASH_ACCESS_KEY')
 
     parameters = {
-        'query': 'los-angeles-beach',
+        # 'query': 'los-angeles-beach',
+        'query': query.replace(' ', '-') + '-landscape',
         'orientation': 'landscape',
     }
 
