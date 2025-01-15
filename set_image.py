@@ -9,10 +9,15 @@ from get_sensor_data import get_sensor_data
 from get_weather import get_weather
 from PIL import Image, ImageDraw, ImageFont
 
-from inky.auto import auto
+if os.getenv('MOCK_MODE') != 'True':
+    from inky.auto import auto
 
 
 def display_error_message(inky, message):
+    if os.getenv('MOCK_MODE') == 'True':
+        print("Error: " + message)
+        return
+
     # エラーメッセージを含む画像を生成
     img = Image.new("P", (inky.WIDTH, inky.HEIGHT), color=inky.WHITE)
     draw = ImageDraw.Draw(img)
@@ -28,18 +33,17 @@ def display_error_message(inky, message):
 # .envファイルから環境変数を読み込む
 load_dotenv()
 
+if os.getenv('MOCK_MODE') == 'True':
+    inky = None
+else:
+    inky = auto(ask_user=True, verbose=True)
+
 saturation = 0.5
-inky = auto(ask_user=True, verbose=True)
 
 weather_data = get_weather()
 text = format_weather_text(weather_data)
 
 sensor_data = get_sensor_data()
-# sensor_data = {
-#     "co2": 500,
-#     "temperature": 20.9,
-#     "humidity": 25.3
-# }
 
 image_url = get_random_image_url(text['description'])
 
@@ -49,7 +53,9 @@ if not image_url:
 
 image = add_text_to_image(image_url, text, sensor_data)
 
-# image.save("image.png")
+if os.getenv('MOCK_MODE') == 'True':
+    image.save("image.png")
+    exit()
 
 inky.set_image(image, saturation=saturation)
 inky.show()

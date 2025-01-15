@@ -1,9 +1,22 @@
 # https://github.com/adafruit/Adafruit_CircuitPython_SCD4X#usage-example
-import board
-import adafruit_scd4x
+import os
+if os.getenv('MOCK_MODE') != 'True':
+    import board
+    import adafruit_scd4x
+from dotenv import load_dotenv
+
+# .envファイルから環境変数を読み込む
+load_dotenv()
 
 
 def get_sensor_data():
+    if os.getenv('MOCK_MODE') == 'True':
+        return {
+            "co2": 500,
+            "temperature": 20.9,
+            "humidity": 25.3
+        }
+
     i2c = board.I2C()
     scd4x = adafruit_scd4x.SCD4X(i2c)
 
