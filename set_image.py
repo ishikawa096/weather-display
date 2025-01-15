@@ -2,12 +2,15 @@
 import os
 
 from dotenv import load_dotenv
-from add_text_to_image import add_text_to_image
+from draw_contents_to_image import draw_contents_to_image
 from format_weather_text import format_weather_text
+from generate_pop_graph import generate_pop_graph
 from get_random_image_url import get_random_image_url
 from get_sensor_data import get_sensor_data
 from get_weather import get_weather
 from PIL import Image, ImageDraw, ImageFont
+
+from select_random_color import select_random_color
 
 if os.getenv('MOCK_MODE') != 'True':
     from inky.auto import auto
@@ -41,17 +44,20 @@ else:
 saturation = 0.5
 
 weather_data = get_weather()
-text = format_weather_text(weather_data)
+formatted_weather_data = format_weather_text(weather_data)
+color = select_random_color()
+pop_graph = generate_pop_graph(formatted_weather_data['pop'], color)
 
 sensor_data = get_sensor_data()
 
-image_url = get_random_image_url(text['description'])
+image_url = get_random_image_url(formatted_weather_data['description'])
 
 if not image_url:
     display_error_message(inky, "Error: image_url is None")
     exit()
 
-image = add_text_to_image(image_url, text, sensor_data)
+image = draw_contents_to_image(
+    image_url, formatted_weather_data, sensor_data, pop_graph, color)
 
 if os.getenv('MOCK_MODE') == 'True':
     image.save("image.png")

@@ -12,17 +12,13 @@ def format_weather_text(weather_data):
         current = weather_data['current']
         currentWeather = current['weather'][0]
 
-        # 今後24時間分の天気を取得
+        # 今後12時間分の天気を取得
         hourly = [x for x in weather_data['hourly']
-                  if current['dt'] < x['dt'] < current['dt'] + 24 * 60 * 60]
+                  if current['dt'] < x['dt'] < current['dt'] + 12 * 60 * 60]
 
         hourlyPop = [x['pop'] for x in hourly]
-        hourlyPop_str = '\n '.join([','.join(map(str, hourlyPop[i:i + 12]))
-                                    # データをフォーマット
-                                    for i in range(0, len(hourlyPop), 12)])
-
-        hourlyMaxTemp = round(max([x['temp'] for x in hourly]))
-        hourlyMinTemp = round(min([x['temp'] for x in hourly]))
+        hourlyMaxTemp = round(max([x['temp'] for x in hourly]), 1)
+        hourlyMinTemp = round(min([x['temp'] for x in hourly]), 1)
 
         weather_text = {
             'date': currentDate.strftime('%m/%d'),
@@ -31,7 +27,7 @@ def format_weather_text(weather_data):
             'description': currentWeather['description'],
             'maxTemp': hourlyMaxTemp,
             'minTemp': hourlyMinTemp,
-            'pop': '☂' + hourlyPop_str
+            'pop': hourlyPop
         }
         return weather_text
     except Exception as e:
