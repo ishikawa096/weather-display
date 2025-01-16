@@ -1,5 +1,9 @@
 import os
 import requests
+from dotenv import load_dotenv
+
+# .envファイルから環境変数を読み込む
+load_dotenv()
 
 
 def get_weather():

@@ -1,5 +1,10 @@
 # https://github.com/adafruit/Adafruit_CircuitPython_SCD4X#usage-example
 import os
+from dotenv import load_dotenv
+
+# .envファイルから環境変数を読み込む
+load_dotenv()
+
 if os.getenv('MOCK_MODE') != 'True':
     import board
     import adafruit_scd4x
