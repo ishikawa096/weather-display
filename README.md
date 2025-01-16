@@ -12,7 +12,7 @@ https://github.com/pimoroni/inky
 
 Install the required libraries
 ```bash
-pip install -r weather_display/requirements.txt
+pip install -r requirements.txt
 ```
 
 Copy the .env.example file and rename it to .env
@@ -33,7 +33,7 @@ python weather_display/main.py
 
 ## In Raspberry Pi
 
-Copy the weather_display folder and .env to the Raspberry Pi
+Copy the weather_display folder, requirements.txt and .env to the Raspberry Pi
 
 Off the MOCK_MODE in the .env file
 ```bash
