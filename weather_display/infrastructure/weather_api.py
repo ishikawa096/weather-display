@@ -1,9 +1,5 @@
-import requests
 import os
-from dotenv import load_dotenv
-
-# .envファイルから環境変数を読み込む
-load_dotenv()
+import requests
 
 
 def get_weather():
@@ -16,9 +12,9 @@ def get_weather():
     lon = os.getenv('LON')
 
     # APIエンドポイント
-    url = f"{base_url}?lat={lat}&lon={lon}&units=metric&exclude=minutely,daily,alerts&appid={api_key}"
+    url = f"{base_url}?lat={lat}&lon={
+        lon}&units=metric&exclude=minutely,daily,alerts&appid={api_key}"
 
-    # APIリクエストを送信
     response = requests.get(url)
 
     # レスポンスを表示
@@ -27,3 +23,4 @@ def get_weather():
         return weather_data
     else:
         print(f"Error: {response.status_code}")
+        return None

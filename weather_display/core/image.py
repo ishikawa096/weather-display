@@ -1,11 +1,7 @@
 import os
-from dotenv import load_dotenv
 import requests
 from PIL import Image, ImageDraw, ImageFont
 from io import BytesIO
-
-# .envファイルから環境変数を読み込む
-load_dotenv()
 
 
 def get_font(size):
