@@ -6,12 +6,13 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-def get_random_image_url():
+def get_random_image_url(query):
     # Unsplash APIのアクセストークン
     access_key = os.getenv('UNSPLASH_ACCESS_KEY')
 
     parameters = {
-        'query': 'los-angeles-beach',
+        # 'query': 'los-angeles-beach',
+        'query': query.replace(' ', '-') + '-landscape',
         'orientation': 'landscape',
     }
 
@@ -19,8 +20,6 @@ def get_random_image_url():
     url = os.getenv('UNSPLASH_BASE_URL') + '/photos/random' + \
         '?query=' + parameters['query'] + \
         '&orientation=' + parameters['orientation']
-
-    print(f"Request URL: {url}")
 
     # リクエストヘッダーにアクセストークンを追加
     headers = {
@@ -40,7 +39,6 @@ def get_random_image_url():
             'fit=max', 'fit=crop'
         )
 
-        print(f"Random Image URL: {image_url}")
         return image_url
     else:
         print(f"Error: {response.status_code}")

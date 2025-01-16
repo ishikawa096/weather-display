@@ -6,7 +6,7 @@ from core.image import draw_contents_to_image
 from core.weather import format_weather_text, get_weather
 from core.pop_graph import generate_pop_graph
 from core.random_image import get_random_image_url
-from core.sensor import get_sensor_data
+from infrastructure.sensor import get_sensor_data
 from PIL import Image, ImageDraw, ImageFont
 
 from core.color import select_random_color
