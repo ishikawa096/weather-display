@@ -1,4 +1,7 @@
 ## Weather Display☁️
+
+<img src="https://github.com/user-attachments/assets/5d67477e-079c-45b0-88bb-e0beda03ff2b" alt="Weather display example photo" width="300" style="border-radius: 10px;text-align: center;">
+
 ## Dependencies Official Documentation
 - Unsplash API (https://unsplash.com/developers)
 - OpenWeatherMap API (https://openweathermap.org/api)
