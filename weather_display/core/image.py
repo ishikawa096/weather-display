@@ -1,11 +1,7 @@
 import os
-from dotenv import load_dotenv
 import requests
 from PIL import Image, ImageDraw, ImageFont
 from io import BytesIO
-
-# .envファイルから環境変数を読み込む
-load_dotenv()
 
 
 def get_font(size):
@@ -35,20 +31,20 @@ def draw_contents_to_image(image_url, weather_data, sensor_data, pop_graph, colo
 
     draw.text((400, 140), str(sensor_data['humidity']),
               font=get_font(40), fill=color)
-    draw.text((400, 190), '%rh', font(get_font(16), fill=color)  # %rh
+    draw.text((400, 190), '%rh', font=get_font(16), fill=color)  # %rh
 
     # 天気情報を画像に追加
     draw.text((70, 260), str(
         weather_data['temp']), font=get_font(35), fill=color)
-    draw.text((70, 300), '℃', font(get_font(16), fill=color)  # ℃
+    draw.text((70, 300), '℃', font=get_font(16), fill=color)  # ℃
 
     draw.text((50, 350), f"↑{weather_data['maxTemp']}",
               font=get_font(30), fill=color)
     draw.text((50, 380), f"↓{weather_data['minTemp']}",
-              font(get_font(30), fill=color)
-    draw.text((145, 370), '℃', font(get_font(16), fill=color)  # ℃
+              font=get_font(30), fill=color)
+    draw.text((145, 370), '℃', font=get_font(16), fill=color)  # ℃
 
     image.paste(pop_graph, (220, 250), mask=pop_graph)
-    draw.text((200, 380), '☂', font(get_font(30), fill=color)
+    draw.text((200, 380), '☂', font=get_font(30), fill=color)
 
     return image
