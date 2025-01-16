@@ -72,3 +72,7 @@ Create a log file
 sudo touch /var/log/cron.log
 sudo chown pi:pi /var/log/cron.log
 ```
+
+## Thanks
+
+The VCR font by artdzyk (https://www.dafont.com/better-vcr.font)
