@@ -1,19 +1,13 @@
-# https: // github.com/pimoroni/inky/blob/main/examples/7color/buttons.py
+# https://github.com/pimoroni/inky/blob/main/examples/7color/buttons.py
+import os
+from dotenv import load_dotenv
 import gpiod
 import gpiodevice
 from gpiod.line import Bias, Direction, Edge
+import subprocess
 
-print(
-    """buttons.py - Detect which button has been pressed
-
-This example should demonstrate how to:
- 1. set up gpiod to read buttons,
- 2. determine which button has been pressed
-
-Press Ctrl+C to exit!
-
-"""
-)
+# .envファイルから環境変数を読み込む
+load_dotenv()
 
 # GPIO pins for each button (from top to bottom)
 # These will vary depending on platform and the ones
@@ -48,16 +42,19 @@ line_config = dict.fromkeys(OFFSETS, INPUT)
 # Request the lines, *whew*
 request = chip.request_lines(consumer="inky7-buttons", config=line_config)
 
+# スクリプトのディレクトリを取得
+script_dir = os.path.dirname(os.path.abspath(__file__))
 
-# "handle_button" will be called every time a button is pressed
-# It receives one argument: the associated gpiod event object.
-def handle_button(event):
-    index = OFFSETS.index(event.line_offset)
-    gpio_number = BUTTONS[index]
-    label = LABELS[index]
-    print(f"Button press detected on GPIO #{gpio_number} label: {label}")
+# 仮想環境のパス
+python_path = os.getenv("PYTHON_PATH")
+
+
+def handle_button():
+    # main.pyをサブプロセスとして実行
+    main_script = os.path.join(script_dir, "main.py")
+    subprocess.run([python_path, main_script])
 
 
 while True:
     for event in request.read_edge_events():
-        handle_button(event)
+        handle_button()

@@ -73,6 +73,35 @@ sudo touch /var/log/cron.log
 sudo chown pi:pi /var/log/cron.log
 ```
 
+### Setting Up Inky Button Press Monitoring (Optional)
+```bash
+sudo vi /etc/systemd/system/inky-buttons.service
+```
+
+Add the following lines to the inky-buttons.service file
+```bash
+[Unit]
+Description=Inky Buttons Service
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/home/pi/.virtualenvs/pimoroni/bin/python3 /home/pi/weather_display/buttons.py
+Restart=on-failure
+User=pi
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Enable the service
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable inky-buttons.service
+sudo systemctl start inky-buttons.service
+sudo systemctl status weather_display.service
+```
+
 ## Thanks
 
 The VCR font by artdzyk (https://www.dafont.com/better-vcr.font)
