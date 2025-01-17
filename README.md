@@ -99,7 +99,7 @@ Enable the service
 sudo systemctl daemon-reload
 sudo systemctl enable inky-buttons.service
 sudo systemctl start inky-buttons.service
-sudo systemctl status weather_display.service
+sudo systemctl status inky-buttons.service
 ```
 
 ## Thanks
