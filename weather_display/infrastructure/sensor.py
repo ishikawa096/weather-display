@@ -10,7 +10,7 @@ if os.getenv('MOCK_MODE') != 'True':
     import adafruit_scd4x
 
 
-def sensor():
+def get_sensor():
     if os.getenv('MOCK_MODE') == 'True':
         return None
 
@@ -28,7 +28,7 @@ def get_sensor_data():
             "temperature": 20.9,
             "humidity": 25.3
         }
-    sensor = sensor()
+    sensor = get_sensor()
     sensor.measure_single_shot()
 
     if sensor.data_ready:

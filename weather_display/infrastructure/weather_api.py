@@ -16,8 +16,8 @@ def get_weather():
     lon = os.getenv('LON')
 
     # APIエンドポイント
-    url = f"{base_url}?lat={lat}&lon={
-        lon}&units=metric&exclude=minutely,daily,alerts&appid={api_key}"
+    url = f"{base_url}?lat={lat}&lon=" + \
+        f"{lon}&units=metric&exclude=minutely,daily,alerts&appid={api_key}"
 
     response = requests.get(url)
 
